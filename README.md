@@ -9,6 +9,7 @@ This repository contains examples for the nRF5340 DK.
 | [blinky](./blinky/)     | Blinky example   |
 | [button](./button/)     | Button example   |
 | [Fade Led](./fade_led/) | Fade Led example |
+| [Threads](./threads/)   | Threads example  |
 
 ## Links
 
