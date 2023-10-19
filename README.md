@@ -4,10 +4,11 @@ This repository contains examples for the nRF5340 DK.
 
 ## Folders
 
-| Folder              | Description    |
-| ------------------- | -------------- |
-| [blinky](./blinky/) | Blinky example |
-| [button](./button/) | Button example |
+| Folder                  | Description      |
+| ----------------------- | ---------------- |
+| [blinky](./blinky/)     | Blinky example   |
+| [button](./button/)     | Button example   |
+| [Fade Led](./fade_led/) | Fade Led example |
 
 ## Links
 
