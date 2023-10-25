@@ -6,6 +6,7 @@ This repository contains examples for the nRF5340 DK.
 
 | Folder                    | Description       |
 | ------------------------- | ----------------- |
+| [ble](./ble/)             | BLE example       |
 | [blinky](./blinky/)       | Blinky example    |
 | [button](./button/)       | Button example    |
 | [fade led](./fade_led/)   | Fade Led example  |
