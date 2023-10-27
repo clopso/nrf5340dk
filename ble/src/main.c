@@ -26,7 +26,7 @@
 
 #include <dk_buttons_and_leds.h>
 
-#define DEVICE_NAME             CONFIG_BT_DEVICE_NAME
+#define DEVICE_NAME             "clopso BLE"
 #define DEVICE_NAME_LEN         (sizeof(DEVICE_NAME) - 1)
 
 
@@ -34,7 +34,8 @@
 #define CON_STATUS_LED          DK_LED2
 #define RUN_LED_BLINK_INTERVAL  1000
 
-#define USER_LED                DK_LED3
+#define BUTTON_LED              DK_LED3
+#define USER_LED                DK_LED4
 
 #define USER_BUTTON             DK_BTN1_MSK
 
@@ -68,7 +69,6 @@ static void disconnected(struct bt_conn *conn, uint8_t reason)
 	dk_set_led_off(CON_STATUS_LED);
 }
 
-#ifdef CONFIG_BT_LBS_SECURITY_ENABLED
 static void security_changed(struct bt_conn *conn, bt_security_t level,
 			     enum bt_security_err err)
 {
@@ -83,17 +83,13 @@ static void security_changed(struct bt_conn *conn, bt_security_t level,
 			err);
 	}
 }
-#endif
 
 BT_CONN_CB_DEFINE(conn_callbacks) = {
 	.connected        = connected,
 	.disconnected     = disconnected,
-#ifdef CONFIG_BT_LBS_SECURITY_ENABLED
 	.security_changed = security_changed,
-#endif
 };
 
-#if defined(CONFIG_BT_LBS_SECURITY_ENABLED)
 static void auth_passkey_display(struct bt_conn *conn, unsigned int passkey)
 {
 	char addr[BT_ADDR_LE_STR_LEN];
@@ -139,10 +135,7 @@ static struct bt_conn_auth_info_cb conn_auth_info_callbacks = {
 	.pairing_complete = pairing_complete,
 	.pairing_failed = pairing_failed
 };
-#else
-static struct bt_conn_auth_cb conn_auth_callbacks;
-static struct bt_conn_auth_info_cb conn_auth_info_callbacks;
-#endif
+
 
 static void app_led_cb(bool led_state)
 {
@@ -167,6 +160,7 @@ static void button_changed(uint32_t button_state, uint32_t has_changed)
 
 		bt_lbs_send_button_state(user_button_state);
 		app_button_state = user_button_state ? true : false;
+		dk_set_led(BUTTON_LED, user_button_state);
 	}
 }
 
